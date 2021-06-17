@@ -72,7 +72,7 @@ namespace TesteSemanas
                 daysToAdd += daysInWeek;
             }
 
-            DateTime dataFim = fimPeriodo.AddDays((int)DayOfWeek.Friday - (int)fimPeriodo.DayOfWeek);
+            DateTime dataFim = fimPeriodo.AddDays((int)DayOfWeek.Friday - (int)fimPeriodo.DayOfWeek); //pega a ultima sexta feira do período como data limite pra se iniciar uma semana
 
             for (DateTime dataInicioSemana = inicioPeriodo.AddDays(daysToAdd); dataInicioSemana < dataFim; dataInicioSemana = dataInicioSemana.AddDays(daysInWeek))
             {
