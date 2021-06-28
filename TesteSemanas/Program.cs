@@ -7,11 +7,11 @@ namespace TesteSemanas
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
 
             List<DateTime> datas = new();
-            datas.Add(new DateTime(2021, 02, 06));
+            datas.Add(new DateTime(2021, 02, 03));
             datas.Add(new DateTime(2021, 06, 03));
             datas.Add(new DateTime(2021, 06, 17));
             datas.Add(new DateTime(2021, 10, 01));
@@ -27,7 +27,7 @@ namespace TesteSemanas
                 semanas.AddRange(ListaSemanasDeUmPeriodo(datas[i], datas[i + 1], DayOfWeek.Monday));
             }
 
-            DateTime dataReferencia = new(2021, 12, 04); //data de referencia, geralmente é a do dia corrente
+            DateTime dataReferencia = new(2021, 02, 02); //data de referencia, geralmente é a do dia corrente
 
             Semana semana = semanas.FirstOrDefault(x => x.InicioSemana <= dataReferencia &&  dataReferencia <= x.FimSemana); //pega qual semana aquela data se encontra
 
@@ -36,7 +36,15 @@ namespace TesteSemanas
             if (semana != null)
                 numeroSemana = semanas.IndexOf(semana) + 1; //verifica o numero da semana recuperada
 
-            Console.WriteLine("Numero semana: {0}", numeroSemana);
+            Console.WriteLine($"Numero semana do dia {dataReferencia.ToShortDateString()}: {numeroSemana}");
+            Console.WriteLine("\n\n\n");
+
+            int semanaDesejada = 5;
+
+            Semana semanaEscolhida = semanas[semanaDesejada - 1];
+            Console.WriteLine($"Datas da semana {semanaDesejada} \n\nInício: {semanaEscolhida.InicioSemana.ToShortDateString()} \nFim: {semanaEscolhida.FimSemana.ToShortDateString()}");
+
+            Console.ReadKey();
         }
 
 
@@ -57,10 +65,10 @@ namespace TesteSemanas
             return new Semana { InicioSemana = startOfWeek, FimSemana = endOfWeek };
         }
 
-        //1- Data de Inicio preenchida entre segunda à sexta inicia sempre na segunda-feira da semana corrente
+        //1- Data de Inicio preenchida entre segunda e sexta inicia sempre na semana corrente
         //2- Data preenchida entre sábado e domingo inicio sempre na próxima segunda.
         //3- Visualização semana: As semanas devem aparecer sempre com inicio em uma segunda e término no domingo
-        //4- Semanas que tenham atrito  de data de período letivo e férias devem ser visualizadas em períodos mais "curto" correspondendo a visualização somente até data limite de inicio de férias. O inicio das mesmas deverá ocorrer no dia indicado como primeiro dia de inicio de férias.
+        //4- Semanas que tenham atrito de data de período letivo e férias devem ser visualizadas em períodos mais "curto" correspondendo a visualização somente até data limite de inicio de férias. O inicio das mesmas deverá ocorrer no dia indicado como primeiro dia de inicio de férias.
         public static List<Semana> ListaSemanasDeUmPeriodo(DateTime inicioPeriodo, DateTime fimPeriodo, DayOfWeek diaInicioSemana)
         {
             const int daysInWeek = 7;
