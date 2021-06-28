@@ -29,7 +29,7 @@ namespace TesteSemanas
 
             DateTime dataReferencia = new(2021, 02, 02); //data de referencia, geralmente é a do dia corrente
 
-            Semana semana = semanas.FirstOrDefault(x => x.InicioSemana <= dataReferencia &&  dataReferencia <= x.FimSemana); //pega qual semana aquela data se encontra
+            Semana semana = semanas.FirstOrDefault(x => x.InicioSemana <= dataReferencia && dataReferencia <= x.FimSemana); //pega qual semana aquela data se encontra
 
             int numeroSemana = -1;
 
@@ -46,8 +46,6 @@ namespace TesteSemanas
 
             Console.ReadKey();
         }
-
-
 
         public class Semana
         {
@@ -86,7 +84,6 @@ namespace TesteSemanas
             {
                 DateTime dataFimSemana = dataInicioSemana.AddDays(6);
                 result.Add(new Semana { InicioSemana = dataInicioSemana < inicioPeriodo ? inicioPeriodo : dataInicioSemana, FimSemana = dataFimSemana > fimPeriodo ? fimPeriodo : dataFimSemana });
-
             }
 
             return result;
